@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Assistant | Excuses, Compliments & Gifts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="particles-container" id="particles-js"></div>
+    
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h2>Life<span>Assistant</span></h2>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="active" onclick="navigate('home')">Home</a>
+                <a href="#" onclick="navigate('excuse')">Excuses</a>
+                <a href="#" onclick="navigate('compliment')">Compliments</a>
+                <a href="#" onclick="navigate('gift')">Gifts</a>
+                <a href="#" onclick="navigate('about')">About</a>
+            </div>
+            <div class="theme-toggle">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Welcome Page -->
+    <div id="home" class="container">
+        <div class="hero-section">
+            <h1 class="animated-title">Welcome to <span>Life Assistant</span></h1>
+            <p class="tagline">Your creative companion for everyday situations</p>
+            
+            <div class="features">
+                <div class="feature-card" onclick="navigate('excuse')">
+                    <div class="icon-container">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <h3>Excuse Generator</h3>
+                    <p>Need a creative way out of a situation? We've got you covered.</p>
+                </div>
+                
+                <div class="feature-card" onclick="navigate('compliment')">
+                    <div class="icon-container">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Compliment Generator</h3>
+                    <p>Spread positivity with perfectly crafted compliments.</p>
+                </div>
+                
+                <div class="feature-card" onclick="navigate('gift')">
+                    <div class="icon-container">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>Gift Ideas</h3>
+                    <p>Thoughtful last-minute gift suggestions for any occasion.</p>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <button class="primary-btn pulse" onclick="navigate('excuse')">Get Started</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Excuse Generator Page -->
+    <div id="excuse" class="hidden generator-page">
+        <div class="content-box">
+            <h1 class="page-title"><i class="fas fa-comment-dots icon-title"></i> Excuse Generator</h1>
+            
+            <div class="context-selector">
+                <label for="excuse-context">Choose a context:</label>
+                <select id="excuse-context">
+                    <option value="work">Work</option>
+                    <option value="school">School</option>
+                    <option value="social">Social Events</option>
+                    <option value="deadline">Missed Deadlines</option>
+                    <option value="random">Surprise Me</option>
+                </select>
+            </div>
+            
+            <div class="output-box animated">
+                <p id="excuse-output">Your creative excuse will appear here...</p>
+                <div class="output-actions">
+                    <button class="action-btn copy-btn" onclick="copyToClipboard('excuse-output')">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <button class="action-btn share-btn" onclick="shareContent('excuse-output')">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <button class="interactive-btn generate-btn" onclick="generateExcuse()">
+                <i class="fas fa-magic"></i> Generate Excuse
+            </button>
+            
+            <div class="save-section">
+                <h3>Saved Excuses</h3>
+                <div id="saved-excuses" class="saved-items">
+                    <!-- Saved excuses will appear here -->
+                    <p class="empty-state">No saved excuses yet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Compliments Generator Page -->
+    <div id="compliment" class="hidden generator-page">
+        <div class="content-box">
+            <h1 class="page-title"><i class="fas fa-heart icon-title"></i> Compliment Generator</h1>
+            
+            <div class="context-selector">
+                <label for="compliment-type">Choose a type:</label>
+                <select id="compliment-type">
+                    <option value="personal">Personal Qualities</option>
+                    <option value="appearance">Appearance</option>
+                    <option value="achievement">Achievements</option>
+                    <option value="friendship">Friendship</option>
+                    <option value="professional">Professional</option>
+                </select>
+            </div>
+            
+            <div class="recipient-input">
+                <label for="recipient-name">Recipient's name (optional):</label>
+                <input type="text" id="recipient-name" placeholder="Enter name for personalized compliment">
+            </div>
+            
+            <div class="output-box animated">
+                <p id="compliment-output">Your heartfelt compliment will appear here...</p>
+                <div class="output-actions">
+                    <button class="action-btn copy-btn" onclick="copyToClipboard('compliment-output')">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <button class="action-btn share-btn" onclick="shareContent('compliment-output')">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <button class="interactive-btn generate-btn" onclick="generateCompliment()">
+                <i class="fas fa-magic"></i> Generate Compliment
+            </button>
+            
+            <div class="save-section">
+                <h3>Saved Compliments</h3>
+                <div id="saved-compliments" class="saved-items">
+                    <!-- Saved compliments will appear here -->
+                    <p class="empty-state">No saved compliments yet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Last-Minute Gift Ideas Page -->
+    <div id="gift" class="hidden generator-page">
+        <div class="content-box">
+            <h1 class="page-title"><i class="fas fa-gift icon-title"></i> Gift Ideas Generator</h1>
+            
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="gift-occasion">Occasion:</label>
+                    <select id="gift-occasion">
+                        <option value="birthday">Birthday</option>
+                        <option value="anniversary">Anniversary</option>
+                        <option value="holiday">Holiday</option>
+                        <option value="thank-you">Thank You</option>
+                        <option value="just-because">Just Because</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="gift-budget">Budget:</label>
+                    <select id="gift-budget">
+                        <option value="low">Under $20</option>
+                        <option value="medium">$20-$50</option>
+                        <option value="high">$50-$100</option>
+                        <option value="luxury">$100+</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="gift-relationship">Relationship:</label>
+                    <select id="gift-relationship">
+                        <option value="friend">Friend</option>
+                        <option value="family">Family</option>
+                        <option value="romantic">Romantic Partner</option>
+                        <option value="colleague">Colleague</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="output-box animated">
+                <div id="gift-output-container">
+                    <p id="gift-output">Your perfect gift idea will appear here...</p>
+                    <div class="gift-details">
+                        <p id="gift-description"></p>
+                        <p id="gift-price-range"></p>
+                    </div>
+                </div>
+                <div class="output-actions">
+                    <button class="action-btn copy-btn" onclick="copyToClipboard('gift-output-container')">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <button class="action-btn favorite-btn" onclick="saveGift()">
+                        <i class="far fa-star"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <button class="interactive-btn generate-btn" onclick="generateGift()">
+                <i class="fas fa-magic"></i> Find Perfect Gift
+            </button>
+            
+            <div class="gift-suggestions">
+                <h3>Saved Gift Ideas</h3>
+                <div id="saved-gifts" class="saved-items">
+                    <!-- Saved gifts will appear here -->
+                    <p class="empty-state">No saved gift ideas yet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- About Page -->
+    <div id="about" class="hidden generator-page">
+        <div class="content-box about-content">
+            <h1 class="page-title">About Life Assistant</h1>
+            
+            <div class="about-section">
+                <h2>Our Story</h2>
+                <p>Life Assistant was created to help you navigate those tricky social situations with ease and creativity. Whether you need a clever excuse, a heartfelt compliment, or a thoughtful gift idea, we've got you covered.</p>
+                
+                <h2>How It Works</h2>
+                <p>Our generators use a combination of creativity and context to provide you with unique, personalized content for every situation. The more you use Life Assistant, the more it learns your preferences!</p>
+                
+                <h2>Features</h2>
+                <ul class="features-list">
+                    <li><i class="fas fa-check-circle"></i> Contextual generators that adapt to specific situations</li>
+                    <li><i class="fas fa-check-circle"></i> Save your favorite outputs for future use</li>
+                    <li><i class="fas fa-check-circle"></i> Personalization options for more relevant results</li>
+                    <li><i class="fas fa-check-circle"></i> Easy sharing with friends and family</li>
+                    <li><i class="fas fa-check-circle"></i> Dark mode for comfortable browsing</li>
+                </ul>
+            </div>
+            
+            <div class="cta-section">
+                <button class="primary-btn" onclick="navigate('home')">Back to Home</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>Life<span>Assistant</span></h3>
+                <p>Your creative companion</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="#" onclick="navigate('home')">Home</a>
+                <a href="#" onclick="navigate('excuse')">Excuses</a>
+                <a href="#" onclick="navigate('compliment')">Compliments</a>
+                <a href="#" onclick="navigate('gift')">Gifts</a>
+                <a href="#" onclick="navigate('about')">About</a>
+            </div>
+            
+            <div class="social-links">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Life Assistant. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Modal for sharing -->
+    <div id="share-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Share This Content</h2>
+            <div class="share-options">
+                <button class="share-option" data-platform="facebook">
+                    <i class="fab fa-facebook"></i> Facebook
+                </button>
+                <button class="share-option" data-platform="twitter">
+                    <i class="fab fa-twitter"></i> Twitter
+                </button>
+                <button class="share-option" data-platform="whatsapp">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </button>
+                <button class="share-option" data-platform="email">
+                    <i class="fas fa-envelope"></i> Email
+                </button>
+            </div>
+            <div class="share-link-container">
+                <input type="text" id="share-link" readonly>
+                <button onclick="copyShareLink()">Copy</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle"></i>
+            <div class="toast-message">
+                <span id="toast-text">Content copied to clipboard!</span>
+            </div>
+        </div>
+        <div class="progress"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
